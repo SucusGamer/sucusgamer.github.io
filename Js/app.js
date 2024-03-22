@@ -53,6 +53,8 @@ function drawFlower(x, y, petalCount, petalRadiusX, petalRadiusY, stemHeight) {
           drawPetal(470, petalY2, 15, 2, 300, 'green', currentStep);
           currentStep++;
           setTimeout(() => requestAnimationFrame(drawPetalOnStem), 100); // Haciendo la animación más lenta ajustando el valor de 100
+        } else {
+          showResultModal();
         }
       }
 
@@ -80,6 +82,11 @@ function drawFlower(x, y, petalCount, petalRadiusX, petalRadiusY, stemHeight) {
 
   drawNextPetal();
 }
+
+function showResultModal() {
+  document.getElementById('myModal').style.display = "block";
+}
+
 
 function drawFlowerWithoutStem(x, y, petalCount, petalRadiusX, petalRadiusY, stemHeight) {
   const stemSteps = 50;
@@ -134,7 +141,19 @@ function createMultipleFlowers() {
 
     drawFlowerWithoutStem(x, y, 8, 30, 80, flowerSize);
   }
+
+  // Mostrar el modal cuando termine de dibujar las flores
+  setTimeout(function() {
+    document.getElementById('myModal').style.display = "block";
+  }, 5000); // Se muestra después de 5 segundos (ajusta este valor según sea necesario)
 }
+
+
+// Cerrar el modal cuando se hace clic en la 'x'
+document.getElementsByClassName("close")[0].addEventListener('click', function() {
+  document.getElementById('myModal').style.display = "none";
+});
+
 
 let originalTitle = document.title;
 
@@ -164,3 +183,4 @@ document.getElementById("B12").addEventListener('click', function() {
   createMultipleFlowers();
   h1.remove();
 });
+
